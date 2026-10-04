@@ -53,6 +53,42 @@ public class TOadsNoticeItem implements Serializable {
     @ApiModelProperty(value = "事由与所对点位的记要")
     private String content;
 
+    /** 所对点位码（对到点位底册，注销则本行派不出） */
+    @TableField("spot_no")
+    @ApiModelProperty(value = "所对点位码（对到点位底册，注销则本行派不出）")
+    private String spotNo;
+
+    /** 联系栏（空着好几季没人补则本行派不出） */
+    @TableField("contact")
+    @ApiModelProperty(value = "联系栏（空着好几季没人补则本行派不出）")
+    private String contact;
+
+    /** 路段目录代号（并拨键一） */
+    @TableField("road_no")
+    @ApiModelProperty(value = "路段目录代号（并拨键一）")
+    private String roadNo;
+
+    /** 门牌段（并拨键二） */
+    @TableField("door_seg")
+    @ApiModelProperty(value = "门牌段（并拨键二）")
+    private String doorSeg;
+
+    /** 承接岗位代号（定额按此归口） */
+    @TableField("post_no")
+    @ApiModelProperty(value = "承接岗位代号（定额按此归口）")
+    private String postNo;
+
+    /** 派发那一刻（办成的两边记号之一） */
+    @TableField("sent_at")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @ApiModelProperty(value = "派发那一刻（办成的两边记号之一）")
+    private Date sentAt;
+
+    /** 派不出原因（卡住的那一步连同原因，供日后重排） */
+    @TableField("fail_reason")
+    @ApiModelProperty(value = "派不出原因（卡住的那一步连同原因，供日后重排）")
+    private String failReason;
+
     /** 条目情形 0搁着 1已发出 2发不成 */
     @TableField("status")
     @ApiModelProperty(value = "条目情形 0搁着 1已发出 2发不成")
@@ -128,6 +164,62 @@ public class TOadsNoticeItem implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getSpotNo() {
+        return spotNo;
+    }
+
+    public void setSpotNo(String spotNo) {
+        this.spotNo = spotNo;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getRoadNo() {
+        return roadNo;
+    }
+
+    public void setRoadNo(String roadNo) {
+        this.roadNo = roadNo;
+    }
+
+    public String getDoorSeg() {
+        return doorSeg;
+    }
+
+    public void setDoorSeg(String doorSeg) {
+        this.doorSeg = doorSeg;
+    }
+
+    public String getPostNo() {
+        return postNo;
+    }
+
+    public void setPostNo(String postNo) {
+        this.postNo = postNo;
+    }
+
+    public Date getSentAt() {
+        return sentAt;
+    }
+
+    public void setSentAt(Date sentAt) {
+        this.sentAt = sentAt;
+    }
+
+    public String getFailReason() {
+        return failReason;
+    }
+
+    public void setFailReason(String failReason) {
+        this.failReason = failReason;
     }
 
     public Integer getStatus() {

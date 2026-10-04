@@ -128,3 +128,15 @@ oss:
   access-key: minioadmin  # 上文创建的AK
   secret-key: minioadmin # 上文创建的SK
   bucket-name: v2-cloud  # 上文创建的桶名称
+
+#到期催办与现场巡查清单——夜间轮次口径
+oads:
+  notice:
+    #法定节假日（yyyy-MM-dd），数日子时不算
+    holidays: []
+    #市里下文停办的日子（yyyy-MM-dd），数日子时不算
+    suspensions: []
+    #岗位每季派发定额：未单列的岗位一律用这个数
+    quota-default: 500
+    #分岗位定额：岗位代号 -> 每季件数
+    quota-by-post: {}
