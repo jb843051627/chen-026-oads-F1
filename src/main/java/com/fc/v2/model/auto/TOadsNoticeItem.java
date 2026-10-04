@@ -53,10 +53,56 @@ public class TOadsNoticeItem implements Serializable {
     @ApiModelProperty(value = "事由与所对点位的记要")
     private String content;
 
-    /** 条目情形 0搁着 1已发出 2发不成 */
+    /** 所对点位码（挂点位底册） */
+    @TableField("spot_no")
+    @ApiModelProperty(value = "所对点位码（挂点位底册）")
+    private String spotNo;
+
+    /** 路段目录代号（并拨键一） */
+    @TableField("area_no")
+    @ApiModelProperty(value = "路段目录代号（并拨键一）")
+    private String areaNo;
+
+    /** 门牌段（并拨键二） */
+    @TableField("door_seg")
+    @ApiModelProperty(value = "门牌段（并拨键二）")
+    private String doorSeg;
+
+    /** 联系栏 */
+    @TableField("contact")
+    @ApiModelProperty(value = "联系栏")
+    private String contact;
+
+    /** 条目情形 0搁着(未启动) 1已发出(已派发) 2发不成(派不出) */
     @TableField("status")
-    @ApiModelProperty(value = "条目情形 0搁着 1已发出 2发不成")
+    @ApiModelProperty(value = "条目情形 0搁着(未启动) 1已发出(已派发) 2发不成(派不出)")
     private Integer status;
+
+    /** 派发那一刻（两边记号之一） */
+    @TableField("sent_at")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @ApiModelProperty(value = "派发那一刻（两边记号之一）")
+    private Date sentAt;
+
+    /** 接手的岗位（两边记号之一） */
+    @TableField("sent_post")
+    @ApiModelProperty(value = "接手的岗位（两边记号之一）")
+    private String sentPost;
+
+    /** 卡住的那一步 */
+    @TableField("fail_step")
+    @ApiModelProperty(value = "卡住的那一步")
+    private String failStep;
+
+    /** 派不出原因（毛病出在哪一格） */
+    @TableField("fail_reason")
+    @ApiModelProperty(value = "派不出原因（毛病出在哪一格）")
+    private String failReason;
+
+    /** 本轮轮次码（三个数只讲本次这一轮） */
+    @TableField("round_no")
+    @ApiModelProperty(value = "本轮轮次码（三个数只讲本次这一轮）")
+    private String roundNo;
 
     /** 删除标记 0正常 1删除 */
     @TableField("del_flag")
@@ -130,12 +176,84 @@ public class TOadsNoticeItem implements Serializable {
         this.content = content;
     }
 
+    public String getSpotNo() {
+        return spotNo;
+    }
+
+    public void setSpotNo(String spotNo) {
+        this.spotNo = spotNo;
+    }
+
+    public String getAreaNo() {
+        return areaNo;
+    }
+
+    public void setAreaNo(String areaNo) {
+        this.areaNo = areaNo;
+    }
+
+    public String getDoorSeg() {
+        return doorSeg;
+    }
+
+    public void setDoorSeg(String doorSeg) {
+        this.doorSeg = doorSeg;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
     public Integer getStatus() {
         return status;
     }
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Date getSentAt() {
+        return sentAt;
+    }
+
+    public void setSentAt(Date sentAt) {
+        this.sentAt = sentAt;
+    }
+
+    public String getSentPost() {
+        return sentPost;
+    }
+
+    public void setSentPost(String sentPost) {
+        this.sentPost = sentPost;
+    }
+
+    public String getFailStep() {
+        return failStep;
+    }
+
+    public void setFailStep(String failStep) {
+        this.failStep = failStep;
+    }
+
+    public String getFailReason() {
+        return failReason;
+    }
+
+    public void setFailReason(String failReason) {
+        this.failReason = failReason;
+    }
+
+    public String getRoundNo() {
+        return roundNo;
+    }
+
+    public void setRoundNo(String roundNo) {
+        this.roundNo = roundNo;
     }
 
     public Integer getDelFlag() {

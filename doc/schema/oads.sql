@@ -59,7 +59,16 @@ CREATE TABLE IF NOT EXISTS t_oads_notice_item (
   due_at datetime DEFAULT NULL COMMENT '该发催办那一一日（落库为 datetime）',
   amount decimal(12,2) DEFAULT NULL COMMENT '最多许提前几日',
   content varchar(255) DEFAULT NULL COMMENT '事由与所对点位的记要',
-  status int DEFAULT NULL COMMENT '条目情形 0搁着 1已发出 2发不成',
+  spot_no varchar(64) DEFAULT NULL COMMENT '所对点位码（挂点位底册）',
+  area_no varchar(64) DEFAULT NULL COMMENT '路段目录代号（并拨键一）',
+  door_seg varchar(64) DEFAULT NULL COMMENT '门牌段（并拨键二）',
+  contact varchar(128) DEFAULT NULL COMMENT '联系栏',
+  status int DEFAULT NULL COMMENT '条目情形 0搁着(未启动) 1已发出(已派发) 2发不成(派不出)',
+  sent_at datetime DEFAULT NULL COMMENT '派发那一刻（两边记号之一）',
+  sent_post varchar(64) DEFAULT NULL COMMENT '接手的岗位（两边记号之一）',
+  fail_step varchar(64) DEFAULT NULL COMMENT '卡住的那一步',
+  fail_reason varchar(255) DEFAULT NULL COMMENT '派不出原因（毛病出在哪一格）',
+  round_no varchar(32) DEFAULT NULL COMMENT '本轮轮次码（三个数只讲本次这一轮）',
   del_flag int DEFAULT '0' COMMENT '删除标记 0正常 1删除',
   create_by varchar(64) DEFAULT NULL COMMENT '创建者',
   create_time datetime DEFAULT NULL COMMENT '创建时间',
@@ -68,6 +77,35 @@ CREATE TABLE IF NOT EXISTS t_oads_notice_item (
   remark varchar(500) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='届期催办与巡查条目';
+
+CREATE TABLE IF NOT EXISTS t_oads_rest_day (
+  id bigint NOT NULL COMMENT '主键',
+  rest_day date NOT NULL COMMENT '休办那一日',
+  kind int DEFAULT NULL COMMENT '休办来路 1法定节假日 2市里下文停办',
+  note varchar(255) DEFAULT NULL COMMENT '依据文号或说明',
+  del_flag int DEFAULT '0' COMMENT '删除标记 0正常 1删除',
+  create_by varchar(64) DEFAULT NULL COMMENT '创建者',
+  create_time datetime DEFAULT NULL COMMENT '创建时间',
+  update_by varchar(64) DEFAULT NULL COMMENT '更新者',
+  update_time datetime DEFAULT NULL COMMENT '更新时间',
+  remark varchar(500) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='休办日历（法定节假日与停办日，数办工日只认这一张表）';
+
+CREATE TABLE IF NOT EXISTS t_oads_post_quota (
+  id bigint NOT NULL COMMENT '主键',
+  post_no varchar(64) NOT NULL COMMENT '岗位代号',
+  quarter_code varchar(8) NOT NULL COMMENT '季度码 如2026Q4',
+  quota_total int DEFAULT NULL COMMENT '本季定额件数',
+  status int DEFAULT '0' COMMENT '定额情形 0在用 1停用',
+  del_flag int DEFAULT '0' COMMENT '删除标记 0正常 1删除',
+  create_by varchar(64) DEFAULT NULL COMMENT '创建者',
+  create_time datetime DEFAULT NULL COMMENT '创建时间',
+  update_by varchar(64) DEFAULT NULL COMMENT '更新者',
+  update_time datetime DEFAULT NULL COMMENT '更新时间',
+  remark varchar(500) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='岗位季度派发定额';
 
 CREATE TABLE IF NOT EXISTS t_oads_permit_bill (
   id bigint NOT NULL COMMENT '主键',

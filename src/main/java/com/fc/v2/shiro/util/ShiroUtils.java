@@ -132,7 +132,8 @@ public class ShiroUtils {
         }
 
         if (tsysUser == null){
-            throw new RuntimeException("用户不存在！");
+            // 定时任务线程里没有登录人：按任务名义记账，不抛异常打断夜跑
+            return "Task";
         }
         return tsysUser.getUsername();
     }
